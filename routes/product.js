@@ -1,17 +1,21 @@
-const express = require("express");
-const Product = require("../models/Product");
-const router = express.Router();
+const router = require("express").Router();
+const authMiddleware = require("../middleware/authMiddleware");
 
-// get all products
-router.get("/", async (req, res) => {
-  const products = await Product.find();
-  res.json(products);
-});
+const {
+  getProducts,
+  getProductById,
+  createProduct,
+  updateProduct,
+  deleteProduct
+} = require("../controllers/productController");
 
-// add product (one time)
-router.post("/", async (req, res) => {
-  const product = await Product.create(req.body);
-  res.json(product);
-});
+// Public
+router.get("/", getProducts);
+router.get("/:id", getProductById);
+
+// Admin (protected)
+router.post("/", authMiddleware, createProduct);
+router.put("/:id", authMiddleware, updateProduct);
+router.delete("/:id", authMiddleware, deleteProduct);
 
 module.exports = router;
