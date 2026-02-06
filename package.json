@@ -1,0 +1,17 @@
+{
+  "name": "my-app-backend",
+  "version": "0.1.0",
+  "private": true,
+
+  "dependencies": {
+    "express": "^4.19.2",
+    "mongoose": "^8.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5"
+  },
+
+  "scripts": {
+    "dev": "node index.js",
+    "start": "node index.js"
+  }
+}
