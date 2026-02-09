@@ -2,14 +2,23 @@ const mongoose = require("mongoose");
 
 const orderSchema = new mongoose.Schema({
   customerName: String,
+  phone: String,
+  address: String,
+
   items: [
     {
-      productName: String,
+      name: String,
       qty: Number,
       price: Number,
     },
   ],
+
   totalAmount: Number,
+
+  paymentId: String,
+  orderId: String,
+  paymentStatus: String,
+
   date: {
     type: Date,
     default: Date.now,

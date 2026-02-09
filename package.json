@@ -20,9 +20,12 @@
   "homepage": "https://github.com/IRFAN-1920/my-app-backend-#readme",
   "dependencies": {
     "cors": "^2.8.6",
+    "crypto": "^1.0.1",
     "dotenv": "^17.2.4",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
-    "mongoose": "^9.1.6"
+    "mongoose": "^9.1.6",
+    "pdfkit": "^0.17.2",
+    "razorpay": "^2.9.6"
   }
 }
