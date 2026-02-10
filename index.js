@@ -4,26 +4,44 @@ const cors = require("cors");
 require("dotenv").config();
 
 const app = express();
+const PORT = process.env.PORT || 5000;
 
-// middleware
+// ---------- Middleware ----------
 app.use(cors());
 app.use(express.json());
 
-// DB connect
+// ---------- MongoDB Connect ----------
 mongoose
-  .connect(process.env.MONGO_URL)
-  .then(() => console.log("MongoDB connected"))
-  .catch((err) => console.log(err));
+  .connect(process.env.MONGO_URI)
+  .then(() => console.log("✅ MongoDB Connected"))
+  .catch((err) => console.error("❌ MongoDB Error:", err));
 
-// routes
-app.use("/api/auth", require("./routes/authRoutes"));
-
+// ---------- Test Route ----------
 app.get("/", (req, res) => {
-  res.send("Backend running 🚀");
+  res.send("🥨 Habeebi Snacks Backend Running");
 });
 
-// server
-app.listen(process.env.PORT, () => {
-  console.log(`Server running on port ${process.env.PORT}`);
+// ---------- Sample Products API ----------
+app.get("/api/products", (req, res) => {
+  res.json([
+    { id: 1, name: "Mixture", price: 240 },
+    { id: 2, name: "Paruppu Vadaam", price: 300 },
+    { id: 3, name: "Laddu", price: 200 }
+  ]);
 });
-app.use("/api/payment", require("./routes/paymentRoutes"));
+
+// ---------- Order API ----------
+app.post("/api/order", (req, res) => {
+  const order = req.body;
+  console.log("🛒 New Order:", order);
+
+  res.json({
+    message: "Order placed successfully",
+    orderId: "HB" + Date.now(),
+  });
+});
+
+// ---------- Server ----------
+app.listen(PORT, () => {
+  console.log(`🚀 Habeebi Snacks Server running on port ${PORT}`);
+});
