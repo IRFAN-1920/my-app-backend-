@@ -1,6 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+GET  /api/products
+POST /api/order
+
 
 const app = express();
 const PORT = 5000;
