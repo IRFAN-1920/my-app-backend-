@@ -1,9 +1,5 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const cors = require("cors");
-GET  /api/products
-POST /api/order
-
 
 const app = express();
 const PORT = 5000;
@@ -11,15 +7,29 @@ const PORT = 5000;
 app.use(cors());
 app.use(express.json());
 
-const MONGO_URI = "mongodb://127.0.0.1:27017/habeebi_snacks";
-
-mongoose
-  .connect(MONGO_URI)
-  .then(() => console.log("✅ MongoDB Connected"))
-  .catch((err) => console.error("❌ MongoDB Error:", err.message));
-
 app.get("/", (req, res) => {
   res.send("🥨 Habeebi Snacks Backend Running");
+});
+
+app.get("/api/products", (req, res) => {
+  res.json([
+    { id: 1, name: "Mixture", price: 240 },
+    { id: 2, name: "Paruppu Vadaam", price: 400 },
+    { id: 3, name: "Laddu", price: 5 },
+    { id: 4, name: "Rava Laddu", price: 5 },
+    { id: 5, name: "Pooranam", price: 15 },
+    { id: 6, name: "Arisivadagam", price: 140 },
+    { id: 7, name: "Penium", price: 10 }
+    { id: 8, name: "Murukku", price: 5 }
+
+  ]);
+});
+
+app.post("/api/order", (req, res) => {
+  res.json({
+    message: "Order placed successfully",
+    orderId: "HB" + Date.now()
+  });
 });
 
 app.listen(PORT, () => {
